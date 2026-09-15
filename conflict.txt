@@ -1,1 +1,2 @@
-console.log('Hello from MAIN and FEATURE branches');
+const GREETING = 'Hello from MAIN and FEATURE branches';
+console.log(GREETING);
