@@ -19,8 +19,7 @@ jobs:
           node -v || true
           echo "All checks passed successfully!"
 
-      - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          extra_args: --no-verification
+      - name: TruffleHog Secret Scan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+          trufflehog filesystem . --no-verification --fail
