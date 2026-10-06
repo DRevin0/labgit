@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./backend
+    container_name: lab_backend
+    environment:
+      - TZ=Europe/Moscow
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+  frontend:
+    build: ./frontend
+    container_name: lab_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

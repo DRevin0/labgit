@@ -1,2 +1,0 @@
-test step 1
-test step 2

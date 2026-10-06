@@ -1,2 +1,0 @@
-const GREETING = 'Hello from MAIN and FEATURE branches';
-console.log(GREETING);
