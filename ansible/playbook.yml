@@ -1,0 +1,38 @@
+---
+- name: Deploy application stack via Docker Compose
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Update apt cache and install prerequisites
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - git
+        state: present
+        update_cache: yes
+    - name: Ensure Docker service is running and enabled
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Ensure destination directory exists on VM
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/app
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+    - name: Copy project files to VM
+      ansible.builtin.copy:
+        src: ../project/
+        dest: /home/{{ ansible_user }}/app/
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+    - name: Run docker compose up
+      ansible.builtin.command:
+        cmd: docker compose up -d --build
+        chdir: /home/{{ ansible_user }}/app
+      become: false
