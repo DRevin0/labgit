@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    image: lab-backend
     container_name: lab_backend
     environment:
       - TZ=Europe/Moscow
@@ -10,6 +11,7 @@ services:
 
   frontend:
     build: ./frontend
+    image: lab-frontend
     container_name: lab_frontend
     ports:
       - "8080:80"
