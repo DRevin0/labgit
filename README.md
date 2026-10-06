@@ -36,7 +36,7 @@ labgit/
 Frontend опубликован наружу:
 
 ```text
-192.168.122.157:8080 → frontend:80
+192.1.1.1:8080 → frontend:80
 ```
 
 Backend напрямую наружу не публикуется.
@@ -80,7 +80,7 @@ Playbook:
 Проверить контейнеры:
 
 ```bash
-ssh bubba@192.168.122.157 "docker ps"
+ssh user@192.1.1.1 "docker ps"
 ```
 
 Должны работать:
@@ -93,13 +93,13 @@ lab_backend
 Приложение:
 
 ```text
-http://192.168.122.157:8080
+http://192.1.1.1:8080
 ```
 
 Проверить API:
 
 ```bash
-curl http://192.168.122.157:8080/api/status
+curl http://192.1.1.1:8080/api/status
 ```
 
 Backend возвращает JSON:
@@ -162,7 +162,7 @@ Frontend публикуется как `8080:80`, backend наружу не пу
 Для ручного запуска непосредственно на VM:
 
 ```bash
-cd /home/bubba/app
+cd /home/user/app
 docker compose up -d --build
 ```
 
@@ -223,17 +223,17 @@ ansible -i inventory.ini webservers -m ping
 ansible-playbook -i inventory.ini playbook.yml
 
 # Проверить контейнеры
-ssh bubba@192.168.122.157 "docker ps"
+ssh user@192.1.1.1 "docker ps"
 
 # Проверить API
-curl http://192.168.122.157:8080/api/status
+curl http://192.1.1.1:8080/api/status
 
 # Проверить Compose
-ssh bubba@192.168.122.157 "cd /home/bubba/app && docker compose ps"
+ssh user@1.1.1.1 "cd /home/bubba/app && docker compose ps"
 
 # Логи
-ssh bubba@192.168.122.157 "docker logs lab_frontend"
-ssh bubba@192.168.122.157 "docker logs lab_backend"
+ssh user@192.1.1.1 "docker logs lab_frontend"
+ssh user@192.1.1.1 "docker logs lab_backend"
 ```
 
 
